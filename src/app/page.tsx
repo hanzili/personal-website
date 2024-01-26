@@ -12,7 +12,7 @@ export default function Home() {
           alt="Picture of L"
           className="rounded-full w-40 md:w-56 md:mr-20"
         />
-        <div className="mt-6 md:mt-0">Hi, I'm Hanzi</div>
+        <div className="mt-6 md:mt-0">Hi, I&apos;m Hanzi</div>
       </div>
       <div className="mt-6">Software Engineer | 3rd-year CS Student @ McGill</div>
     </main>

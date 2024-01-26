@@ -26,7 +26,7 @@ export function Shell({ children }: { children: ReactNode }) {
           size="sm"
           className="ml-5"
         />{" "}
-        <div className="ml-5">Hanzi's Personal Site</div>
+        <div className="ml-5">Hanzi&apos;s Personal Site</div>
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
