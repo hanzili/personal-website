@@ -37,7 +37,7 @@ export function Shell({ children }: { children: ReactNode }) {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <Nav />
+        <Nav onCategoryClick={toggle} />
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>

@@ -18,16 +18,25 @@ const data = [
   { link: "/writing", label: "Writing", icon: IconWriting },
 ];
 
-export function Nav() {
-  const [active, setActive] = useState("");
+interface NavProps {
+  onCategoryClick: () => void;
+}
+
+export function Nav({ onCategoryClick }: NavProps) {
+  const [active, setActive] = useState("Home");
 
   const links = data.map((item) => (
     <Link
       href={item.link}
       key={item.label}
-      className="flex items-center no-underline text-sm text-gray-700 px-3 rounded-sm font-medium my-5"
+      className={`flex items-center no-underline text-sm px-3 rounded-sm font-medium my-5 ${
+        item.label === active ? "text-gray-400" : "text-gray-700"
+      }`}
       data-active={item.label === active || undefined}
-      onClick={() => setActive(item.label)}
+      onClick={() => {
+        setActive(item.label);
+        onCategoryClick();
+      }}
     >
       <item.icon className="text-gray-600 mr-3 w-6 h-6" stroke={1.5} />
       <span>{item.label}</span>
