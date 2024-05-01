@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Link from "next/link";
-import { Group, Code } from "@mantine/core";
 import {
   IconHome,
   IconPacman,
@@ -8,14 +7,13 @@ import {
   IconFileText,
   IconWriting,
 } from "@tabler/icons-react";
-import classes from "./Nav.module.css";
 
 const data = [
   { link: "/", label: "Home", icon: IconHome },
   { link: "/personal-life", label: "Personal Life", icon: IconPacman },
   { link: "/technical-life", label: "Technical Life", icon: IconCode },
   { link: "/resume", label: "Resume", icon: IconFileText },
-  { link: "/writing", label: "Writing", icon: IconWriting },
+  { link: "/writting", label: "Writting", icon: IconWriting },
 ];
 
 interface NavProps {

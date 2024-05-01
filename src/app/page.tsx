@@ -1,6 +1,6 @@
 import Image from "next/image";
 import L from "@/assets/L.png";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase";
 
 export default function Home() {
   console.log(createClient());
