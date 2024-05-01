@@ -1,8 +1,9 @@
 import Image from "next/image";
 import L from "@/assets/L.png";
-
+import { createClient } from "@/utils/supabase/client";
 
 export default function Home() {
+  console.log(createClient());
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="mt-20 flex md:flex-row flex-col justify-center items-center">
