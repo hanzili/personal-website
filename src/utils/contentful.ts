@@ -11,6 +11,13 @@ interface GetAllPostsResponse {
     firstPublishedAt: string;
 }
 
+interface GetPostBySlugResponse {
+    title: string;
+    firstPublishedAt: string;
+    publishedAt: string;
+    content: object;
+}
+
 
 async function fetchGraphQL({ query, preview = isDevelopment }: FetchGraphQLOptions): Promise<any> {
     const res = await fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, {
@@ -25,6 +32,11 @@ async function fetchGraphQL({ query, preview = isDevelopment }: FetchGraphQLOpti
     if (!res.ok) return undefined;
 
     return res.json();
+}
+
+function extractDate(timestamp: string): string {
+    const dateOnly = timestamp.split('T')[0];
+    return dateOnly;
 }
 
 export async function getAllPosts(preview = isDevelopment): Promise<GetAllPostsResponse[]> {
@@ -45,10 +57,41 @@ export async function getAllPosts(preview = isDevelopment): Promise<GetAllPostsR
 
     let flattenedAllPosts = [];
     if (entries) {
-        flattenedAllPosts = entries.data.postCollection.items.map((item: any) => ({ firstPublishedAt: item.sys.firstPublishedAt, title: item.title, slug: item.slug }));
+        flattenedAllPosts = entries.data.postCollection.items.map((item: any) => ({ firstPublishedAt: extractDate(item.sys.firstPublishedAt), title: item.title, slug: item.slug }));
     }
 
-    console.log(flattenedAllPosts);
-
     return flattenedAllPosts;
+}
+
+export async function getPostBySlug(slug: string, preview = isDevelopment): Promise<GetPostBySlugResponse | null> {
+    const entries = await fetchGraphQL({
+        query: `query postQuery {
+        postCollection(where: {slug: "${slug}"}, preview: ${preview}) {
+          items {
+            sys {
+              firstPublishedAt
+              publishedAt
+            }
+            content {
+              json
+            }
+            title
+          }
+        }
+      }`, preview: preview
+    })
+
+    let flattenedPost = null;
+
+    if (entries) {
+        const post = entries.data.postCollection.items[0];
+        flattenedPost = {
+            title: post.title,
+            firstPublishedAt: extractDate(post.sys.firstPublishedAt),
+            publishedAt: extractDate(post.sys.publishedAt),
+            content: post.content,
+        }
+    }
+
+    return flattenedPost;
 }
