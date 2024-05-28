@@ -66,19 +66,33 @@ export async function getAllPosts(preview = isDevelopment): Promise<GetAllPostsR
 export async function getPostBySlug(slug: string, preview = isDevelopment): Promise<GetPostBySlugResponse | null> {
     const entries = await fetchGraphQL({
         query: `query postQuery {
-        postCollection(where: {slug: "${slug}"}, preview: ${preview}) {
-          items {
-            sys {
-              firstPublishedAt
-              publishedAt
+            postCollection(where: { slug: "${slug}" }, limit:1) {
+              items {
+                sys {
+                  firstPublishedAt
+                  publishedAt
+                }
+                content {
+                  json
+                  links {
+                    assets {
+                      block {
+                        sys {
+                          id
+                        }
+                        url
+                        title
+                        width
+                        height
+                      }
+                    }
+                  }
+                }
+                title
+              }
             }
-            content {
-              json
-            }
-            title
           }
-        }
-      }`, preview: preview
+          `, preview: preview
     })
 
     let flattenedPost = null;
@@ -89,7 +103,7 @@ export async function getPostBySlug(slug: string, preview = isDevelopment): Prom
             title: post.title,
             firstPublishedAt: extractDate(post.sys.firstPublishedAt),
             publishedAt: extractDate(post.sys.publishedAt),
-            content: post.content,
+            content: post.content.json,
         }
     }
 

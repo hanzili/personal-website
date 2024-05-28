@@ -33,7 +33,7 @@ export function Shell({ children }: { children: ReactNode }) {
           alt="This is actually picture of L :P"
           className="ml-5"
         />
-        <div className="ml-5">Hanzi&apos;s Personal Site</div>
+        <div className="ml-5">Hanzi&apos;s Personal Website</div>
       </AppShell.Header>
 
       <AppShell.Navbar p="md">

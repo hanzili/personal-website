@@ -1,8 +1,8 @@
-import { NotFoundComponent } from "@/components/NotFoundComponent";
+import { NotFound } from "@/components/NotFound";
 
 
-export default function NotFound() {
+export default function AppNotFound() {
   return (
-    <NotFoundComponent />
+    <NotFound />
   );
 }

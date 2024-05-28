@@ -19,7 +19,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider><Shell>{children}</Shell></MantineProvider>
+        <MantineProvider>
+          <Shell>{children}</Shell>
+        </MantineProvider>
       </body>
     </html>
   );

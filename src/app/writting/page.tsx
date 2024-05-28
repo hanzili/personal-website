@@ -9,16 +9,5 @@ async function getAllWritting() {
 export default async function Writtings() {
   const writtings = await getAllWritting();
 
-  return (
-    <div>
-      {writtings.map((writting) => (
-        <NavLink
-          href={`/writting/${writting.slug}`}
-          key={writting.slug}
-          label={writting.slug}
-          description={writting.firstPublishedAt}
-        />
-      ))}
-    </div>
-  );
+  return <></>;
 }
