@@ -1,4 +1,4 @@
-import { getPostBySlug } from "@/utils/contentful";
+import { getPostBySlug, flattenPost } from "@/utils/contentful";
 import Contentful from "@/components/Contentful";
 import { Document } from "@contentful/rich-text-types";
 
@@ -18,12 +18,14 @@ export default async function Writting({
     return <div>Writting not found</div>;
   }
 
+  const flattenedWritting = flattenPost(writting);
+
   return (
     <div className="p-5">
-      {writting.title}
-      {writting.firstPublishedAt}
-      {writting.publishedAt}
-      <Contentful content={writting.content as Document} />
+      {flattenedWritting.title}
+      {flattenedWritting.firstPublishedAt}
+      {flattenedWritting.publishedAt}
+      {flattenedWritting.content ? <Contentful content={flattenedWritting.content as Document} /> : <div>In process...</div>}
     </div>
   );
 }

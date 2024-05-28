@@ -13,9 +13,15 @@ interface GetAllPostsResponse {
 
 interface GetPostBySlugResponse {
     title: string;
+    content: { json: object, links: object };
+    sys: { firstPublishedAt: string, publishedAt: string };
+}
+
+interface FlattendPost {
+    title: string;
     firstPublishedAt: string;
     publishedAt: string;
-    content: object;
+    content: object | null;
 }
 
 
@@ -95,17 +101,23 @@ export async function getPostBySlug(slug: string, preview = isDevelopment): Prom
           `, preview: preview
     })
 
-    let flattenedPost = null;
+    if (!entries) return null;
 
-    if (entries) {
-        const post = entries.data.postCollection.items[0];
-        flattenedPost = {
-            title: post.title,
-            firstPublishedAt: extractDate(post.sys.firstPublishedAt),
-            publishedAt: extractDate(post.sys.publishedAt),
-            content: post.content.json,
-        }
+    return entries.data.postCollection.items[0];
+}
+
+export function flattenPost(post: GetPostBySlugResponse) : FlattendPost {
+    let flattenedPost : FlattendPost = {
+        title: "",
+        firstPublishedAt: "",
+        publishedAt: "",
+        content: null,
     }
+
+    if (post.title) flattenedPost.title = post.title;
+    if (post.sys.firstPublishedAt) flattenedPost.firstPublishedAt = extractDate(post.sys.firstPublishedAt);
+    if (post.sys.publishedAt) flattenedPost.publishedAt = extractDate(post.sys.publishedAt);
+    if (post.content) flattenedPost.content = post.content.json;
 
     return flattenedPost;
 }

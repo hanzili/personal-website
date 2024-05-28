@@ -16,8 +16,8 @@ import { Divider } from "@mantine/core";
 
 const linkData = [
   { link: "/", label: "Home", icon: IconHome },
-  { link: "/personal-life", label: "Personal Life", icon: IconPacman },
-  { link: "/technical-life", label: "Technical Life", icon: IconCode },
+  // { link: "/personal-life", label: "Personal Life", icon: IconPacman },
+  // { link: "/technical-life", label: "Technical Life", icon: IconCode },
   { link: "/resume", label: "Resume", icon: IconFileText },
   { link: "/writting", label: "Writting", icon: IconWriting },
 ];
