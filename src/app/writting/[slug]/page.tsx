@@ -25,7 +25,11 @@ export default async function Writting({
       {flattenedWritting.title}
       {flattenedWritting.firstPublishedAt}
       {flattenedWritting.publishedAt}
-      {flattenedWritting.content ? <Contentful content={flattenedWritting.content as Document} /> : <div>In process...</div>}
+      {flattenedWritting.content ? (
+        <Contentful content={flattenedWritting.content as Document} />
+      ) : (
+        <div>In process...</div>
+      )}
     </div>
   );
 }

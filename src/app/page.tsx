@@ -14,9 +14,13 @@ export default function Home() {
           alt="Picture of L"
           className="rounded-full w-40 md:w-56 md:mr-20 h-fit"
         />
-        <div className="mt-6 md:mt-0 md:text-6xl text-4xl">Hi, I&apos;m Hanzi</div>
+        <div className="mt-6 md:mt-0 md:text-6xl text-4xl">
+          Hi, I&apos;m Hanzi
+        </div>
       </div>
-      <div className="mt-10 md:text-3xl text-xl">Software Engineer | 3rd-year CS Student @ McGill</div>
+      <div className="mt-10 md:text-3xl text-xl">
+        Software Engineer | 3rd-year CS Student @ McGill
+      </div>
     </div>
   );
 }
